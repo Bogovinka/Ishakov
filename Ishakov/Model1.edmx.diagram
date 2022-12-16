@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b057e84cda24089914d8e37d8bd3520" Name="Diagram1">
+        <EntityTypeShape EntityType="DataBaseModel.Days" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Items" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Logins" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Ratings" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Scheclude" Width="1.5" PointX="7.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Student" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Teacher" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Type_acc" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="DataBaseModel.FK__Scheclude__Days___46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.FK__Ratings__Items_i__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.FK__Scheclude__Items__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.FK__Logins__Type_acc__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.FK__Student__Logins___48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.FK__Teacher__Logins___49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.FK__Ratings__Student__45F365D3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

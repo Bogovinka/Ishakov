@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DataBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Days">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Type_acc" Type="int" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Student_id" Type="int" />
+          <Property Name="Items_id" Type="int" />
+          <Property Name="Evaluation" Type="int" />
+        </EntityType>
+        <EntityType Name="Scheclude">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Days_id" Type="int" />
+          <Property Name="Items_id" Type="int" />
+          <Property Name="Step_lesson" Type="int" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="250" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Logins_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="250" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Logins_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Type_acc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Logins__Type_acc__440B1D61">
+          <End Role="Type_acc" Type="Self.Type_acc" Multiplicity="0..1" />
+          <End Role="Logins" Type="Self.Logins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_acc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Logins">
+              <PropertyRef Name="Type_acc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ratings__Items_i__44FF419A">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="Items_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ratings__Student__45F365D3">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="Student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scheclude__Days___46E78A0C">
+          <End Role="Days" Type="Self.Days" Multiplicity="0..1" />
+          <End Role="Scheclude" Type="Self.Scheclude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Days">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scheclude">
+              <PropertyRef Name="Days_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scheclude__Items__47DBAE45">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Scheclude" Type="Self.Scheclude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scheclude">
+              <PropertyRef Name="Items_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Logins___48CFD27E">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Logins_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__Logins___49C3F6B7">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="Logins_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DataBaseModelContainer">
+          <EntitySet Name="Days" EntityType="Self.Days" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scheclude" EntityType="Self.Scheclude" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_acc" EntityType="Self.Type_acc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Logins__Type_acc__440B1D61" Association="Self.FK__Logins__Type_acc__440B1D61">
+            <End Role="Type_acc" EntitySet="Type_acc" />
+            <End Role="Logins" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ratings__Items_i__44FF419A" Association="Self.FK__Ratings__Items_i__44FF419A">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ratings__Student__45F365D3" Association="Self.FK__Ratings__Student__45F365D3">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scheclude__Days___46E78A0C" Association="Self.FK__Scheclude__Days___46E78A0C">
+            <End Role="Days" EntitySet="Days" />
+            <End Role="Scheclude" EntitySet="Scheclude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scheclude__Items__47DBAE45" Association="Self.FK__Scheclude__Items__47DBAE45">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Scheclude" EntitySet="Scheclude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Logins___48CFD27E" Association="Self.FK__Student__Logins___48CFD27E">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__Logins___49C3F6B7" Association="Self.FK__Teacher__Logins___49C3F6B7">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Days">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Scheclude" Relationship="Self.FK__Scheclude__Days___46E78A0C" FromRole="Days" ToRole="Scheclude" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK__Ratings__Items_i__44FF419A" FromRole="Items" ToRole="Ratings" />
+          <NavigationProperty Name="Scheclude" Relationship="Self.FK__Scheclude__Items__47DBAE45" FromRole="Items" ToRole="Scheclude" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Type_acc" Type="Int32" />
+          <NavigationProperty Name="Type_acc1" Relationship="Self.FK__Logins__Type_acc__440B1D61" FromRole="Logins" ToRole="Type_acc" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__Logins___48CFD27E" FromRole="Logins" ToRole="Student" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Teacher__Logins___49C3F6B7" FromRole="Logins" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Student_id" Type="Int32" />
+          <Property Name="Items_id" Type="Int32" />
+          <Property Name="Evaluation" Type="Int32" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Ratings__Items_i__44FF419A" FromRole="Ratings" ToRole="Items" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Ratings__Student__45F365D3" FromRole="Ratings" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Scheclude">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Days_id" Type="Int32" />
+          <Property Name="Items_id" Type="Int32" />
+          <Property Name="Step_lesson" Type="Int32" />
+          <NavigationProperty Name="Days" Relationship="Self.FK__Scheclude__Days___46E78A0C" FromRole="Scheclude" ToRole="Days" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Scheclude__Items__47DBAE45" FromRole="Scheclude" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Logins_id" Type="Int32" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK__Student__Logins___48CFD27E" FromRole="Student" ToRole="Logins" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK__Ratings__Student__45F365D3" FromRole="Student" ToRole="Ratings" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Logins_id" Type="Int32" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK__Teacher__Logins___49C3F6B7" FromRole="Teacher" ToRole="Logins" />
+        </EntityType>
+        <EntityType Name="Type_acc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK__Logins__Type_acc__440B1D61" FromRole="Type_acc" ToRole="Logins" />
+        </EntityType>
+        <Association Name="FK__Scheclude__Days___46E78A0C">
+          <End Role="Days" Type="Self.Days" Multiplicity="0..1" />
+          <End Role="Scheclude" Type="Self.Scheclude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Days">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scheclude">
+              <PropertyRef Name="Days_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ratings__Items_i__44FF419A">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="Items_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scheclude__Items__47DBAE45">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Scheclude" Type="Self.Scheclude" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Scheclude">
+              <PropertyRef Name="Items_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Logins__Type_acc__440B1D61">
+          <End Role="Type_acc" Type="Self.Type_acc" Multiplicity="0..1" />
+          <End Role="Logins" Type="Self.Logins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_acc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Logins">
+              <PropertyRef Name="Type_acc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Logins___48CFD27E">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Logins_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__Logins___49C3F6B7">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="Logins_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ratings__Student__45F365D3">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="Student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Days" EntityType="Self.Days" />
+          <EntitySet Name="Items" EntityType="Self.Items" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" />
+          <EntitySet Name="Scheclude" EntityType="Self.Scheclude" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <EntitySet Name="Type_acc" EntityType="Self.Type_acc" />
+          <AssociationSet Name="FK__Scheclude__Days___46E78A0C" Association="Self.FK__Scheclude__Days___46E78A0C">
+            <End Role="Days" EntitySet="Days" />
+            <End Role="Scheclude" EntitySet="Scheclude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ratings__Items_i__44FF419A" Association="Self.FK__Ratings__Items_i__44FF419A">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scheclude__Items__47DBAE45" Association="Self.FK__Scheclude__Items__47DBAE45">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Scheclude" EntitySet="Scheclude" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Logins__Type_acc__440B1D61" Association="Self.FK__Logins__Type_acc__440B1D61">
+            <End Role="Type_acc" EntitySet="Type_acc" />
+            <End Role="Logins" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Logins___48CFD27E" Association="Self.FK__Student__Logins___48CFD27E">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__Logins___49C3F6B7" Association="Self.FK__Teacher__Logins___49C3F6B7">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ratings__Student__45F365D3" Association="Self.FK__Ratings__Student__45F365D3">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DataBaseModelContainer" CdmEntityContainer="DataBaseEntities">
+          <EntitySetMapping Name="Days">
+            <EntityTypeMapping TypeName="DataBaseModel.Days">
+              <MappingFragment StoreEntitySet="Days">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="DataBaseModel.Items">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="DataBaseModel.Logins">
+              <MappingFragment StoreEntitySet="Logins">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type_acc" ColumnName="Type_acc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="DataBaseModel.Ratings">
+              <MappingFragment StoreEntitySet="Ratings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Student_id" ColumnName="Student_id" />
+                <ScalarProperty Name="Items_id" ColumnName="Items_id" />
+                <ScalarProperty Name="Evaluation" ColumnName="Evaluation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scheclude">
+            <EntityTypeMapping TypeName="DataBaseModel.Scheclude">
+              <MappingFragment StoreEntitySet="Scheclude">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Days_id" ColumnName="Days_id" />
+                <ScalarProperty Name="Items_id" ColumnName="Items_id" />
+                <ScalarProperty Name="Step_lesson" ColumnName="Step_lesson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="DataBaseModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Logins_id" ColumnName="Logins_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="DataBaseModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Logins_id" ColumnName="Logins_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_acc">
+            <EntityTypeMapping TypeName="DataBaseModel.Type_acc">
+              <MappingFragment StoreEntitySet="Type_acc">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
